@@ -1,3 +1,43 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                        ___   ___   ___    __                                   ;;
+;;                       / _ \ / _ \ / _ \  / /                                   ;;
+;;                      | (_) | | | | (_) |/ /_                                   ;;
+;;                       > _ <| | | |> _ <| '_ \                                  ;;
+;;                      | (_) | |_| | (_) | (_) |                                 ;;
+;;                       \___/ \___/ \___/ \___/ 		                  ;;
+;;         _    _          _   _  _____ __  __          _   _                     ;;
+;;        | |  | |   /\   | \ | |/ ____|  \/  |   /\   | \ | |                    ;;
+;;        | |__| |  /  \  |  \| | |  __| \  / |  /  \  |  \| |                    ;;
+;;        |  __  | / /\ \ | . ` | | |_ | |\/| | / /\ \ | . ` |                    ;;
+;;        | |  | |/ ____ \| |\  | |__| | |  | |/ ____ \| |\  |                    ;;
+;;        |_|  |_/_/    \_\_| \_|\_____|_|  |_/_/    \_\_| \_|                    ;;
+;;                    _____          __  __ ______			          ;;
+;;                   / ____|   /\   |  \/  |  ____|			          ;;
+;;                  | |  __   /  \  | \  / | |__  			          ;;
+;;                  | | |_ | / /\ \ | |\/| |  __| 				  ;;
+;;                  | |__| |/ ____ \| |  | | |____ 				  ;;
+;;                   \_____/_/    \_\_|  |_|______|				  ;;
+;;										  ;;								      										              ;;
+;;	 Copyright (C) 2017 Alex Serodio Goncalves				  ;;
+;;	 Copyright (C) 2017 Bruna Caroline Russi				  ;;
+;;	 Copyright (C) 2017 Guilherme dos Santos Pinto				  ;;
+;;                                                                                ;;
+;;       This program is free software: you can redistribute it and/or modify     ;;
+;;       it under the terms of the GNU General Public License as published by     ;;
+;;	 the Free Software Foundation, either version 3 of the License, or        ;;
+;;	 (at your option) any later version.                                      ;;
+;;                                                                                ;;
+;;	 This program is distributed in the hope that it will be useful,          ;;
+;;	 but WITHOUT ANY WARRANTY; without even the implied warranty of           ;;
+;;	 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            ;;
+;;	 GNU General Public License for more details.                             ;;
+;;                                                                                ;;
+;;	 You should have received a copy of the GNU General Public License        ;;
+;;	 along with this program.  If not, see <http://www.gnu.org/licenses/>.    ;;
+;;                                                                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 DATA SEGMENT
 
 	HANG_VE    		DB  11110000B
