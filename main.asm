@@ -985,5 +985,47 @@ CLEAN_DONE:
     POP DI
     JMP THE_END
 
+
+;-----NOT WORKING YET-----;                 
+ASCII_TO_BITMAP: 
+    PUSH AX
+    PUSH BX
+    PUSH DX 
+    PUSH DI 
+    
+    REPEAT_ASCII_TO_BITMAP:
+    MOV AH, 0                         
+    MOV AL, [SI]
+    SUB AL, 65
+    MOV DL, 2
+    MUL DL	 
+                     
+    CMP [SI], "$"
+	JE WORD_FINISHED  
+	CMP [SI], " "
+	JE EMPTY_SPACE
+ 
+    MOV DI, AX   
+    
+    PUSH SI                          
+	
+	MOV SI, ALPHABET[DI] 
+	CALL SHOWS_LETTER 
+	
+	POP SI              
+	              
+EMPTY_SPACE:	  
+	INC COLUMN_A  
+	INC SI
+	
+	JMP REPEAT_ASCII_TO_BITMAP	
+	
+WORD_FINISHED:
+    POP AX
+    POP BX
+    POP DX
+    POP DI
+    RET
+                                        
 ENDS
 END START
