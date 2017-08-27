@@ -38,994 +38,994 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-DATA SEGMENT
-
-	HANG_VE    		DB  11110000B
-								DB  11110000B
-								DB  11110000B
-								DB  11110000B
-								DB  11110000B
-								DB  11110000B
-								DB  11110000B
-								DB  11110000B
-								DB  "$"
-
-	HANG_HO    		DB  00000000B
-								DB  00000000B
-								DB  00000000B
-								DB  00000000B
-								DB  11111111B
-								DB  11111111B
-								DB  11111111B
-								DB  11111111B
-								DB  "$"
-
-	ROPE      		DB  00011000B
-								DB  00011000B
-								DB  00011000B
-								DB  00011000B
-								DB  00011000B
-								DB  00011000B
-								DB  00011000B
-								DB  00011000B
-								DB	"$"
-
-	HEAD      		DB	00011000B
-								DB	00111100B
-								DB	01000010B
-								DB	10100101B
-								DB	10000001B
-								DB	01000010B
-								DB	00111100B
-								DB	00011000B
-								DB	"$"
-
-	BODY_1     		DB 	00111100B
-								DB	00111100B
-								DB	00111100B
-								DB	00111100B
-								DB	00111100B
-								DB	00111100B
-								DB	00111100B
-								DB	00111100B
-								DB	"$"
-
-	BODY_2     		DB 	00111100B
-								DB	11111100B
-								DB	10111100B
-								DB	10111100B
-								DB	10111100B
-								DB	10111100B
-								DB	10111100B
-								DB	00111100B
-								DB	"$"
-
-	BODY_3     		DB 	00111100B
-								DB	11111111B
-								DB	10111101B
-								DB	10111101B
-								DB	10111101B
-								DB	10111101B
-								DB	10111101B
-								DB	00111100B
-								DB	"$"
-
-	LEG_1     		DB 	01100000B
-								DB	01100000B
-								DB	01100000B
-								DB	01100000B
-								DB	01100000B
-								DB	01100000B
-								DB	01100000B
-								DB	11100000B
-								DB	"$"
-
-	LEG_2   			DB 	01100110B
-								DB	01100110B
-								DB	01100110B
-								DB	01100110B
-								DB	01100110B
-								DB	01100110B
-								DB	01100110B
-								DB	11100111B
-								DB	"$"
-
-
-	LINE   						  DW 00
-	COLUMN_A  					DW 00
-
-	LETTER_A     				DB 0X0C, 0X1E, 0X33, 0X33, 0X3F, 0X33, 0X33, 0X00, "$"
-	LETTER_B     				DB 0XFC, 0X66, 0X66, 0X7C, 0X66, 0X66, 0XFC, 0X00, "$"
-	LETTER_C     				DB 0X3C, 0X66, 0XC0, 0XC0, 0XC0, 0X66, 0X3C, 0X00, "$"
-	LETTER_D     				DB 0XF8, 0X6C, 0X66, 0X66, 0X66, 0X6C, 0XF8, 0X00, "$"
-	LETTER_E     				DB 0XFE, 0X62, 0X68, 0X78, 0X68, 0X62, 0XFE, 0X00, "$"
-	LETTER_F     				DB 0XFE, 0X62, 0X68, 0X78, 0X68, 0X60, 0XF0, 0X00, "$"
-	LETTER_G     				DB 0X3C, 0X66, 0XC0, 0XC0, 0XCE, 0X66, 0X3E, 0X00, "$"
-	LETTER_H     				DB 0X33, 0X33, 0X33, 0X3F, 0X33, 0X33, 0X33, 0X00, "$"
-	LETTER_I     				DB 0X3C, 0X18, 0X18, 0X18, 0X18, 0X18, 0X3C, 0X00, "$"
-	LETTER_J     				DB 0X1E, 0X0C, 0X0C, 0X0C, 0XCC, 0XCC, 0X78, 0X00, "$"
-	LETTER_K     				DB 0XE6, 0X66, 0X6C, 0X78, 0X6C, 0X66, 0XE6, 0X00, "$"
-	LETTER_L     				DB 0XF0, 0X60, 0X60, 0X60, 0X62, 0X66, 0XFE, 0X00, "$"
-	LETTER_M     				DB 0X63, 0X77, 0X7F, 0X7F, 0X6B, 0X63, 0X63, 0X00, "$"
-	LETTER_N     				DB 0XC6, 0XE6, 0XF6, 0XDE, 0XCE, 0XC6, 0XC6, 0X00, "$"
-	LETTER_O     				DB 0X1C, 0X36, 0X63, 0X63, 0X63, 0X36, 0X1C, 0X00, "$"
-	LETTER_P     				DB 0XFC, 0X66, 0X66, 0X7C, 0X60, 0X60, 0XF0, 0X00, "$"
-	LETTER_Q     				DB 0X78, 0XCC, 0XCC, 0XCC, 0XDC, 0X78, 0X1C, 0X00, "$"
-	LETTER_R     				DB 0XFC, 0X66, 0X66, 0X7C, 0X6C, 0X66, 0XE6, 0X00, "$"
-	LETTER_S     				DB 0X78, 0XCC, 0XE0, 0X70, 0X1C, 0XCC, 0X78, 0X00, "$"
-	LETTER_T     				DB 0X3F, 0X2D, 0X0C, 0X0C, 0X0C, 0X0C, 0X1E, 0X00, "$"
-	LETTER_U     				DB 0X33, 0X33, 0X33, 0X33, 0X33, 0X33, 0X3F, 0X00, "$"
-	LETTER_V     				DB 0X33, 0X33, 0X33, 0X33, 0X33, 0X1E, 0X0C, 0X00, "$"
-	LETTER_W     				DB 0X63, 0X63, 0X63, 0X6B, 0X7F, 0X77, 0X63, 0X00, "$"
-	LETTER_X     				DB 0X63, 0X63, 0X36, 0X1C, 0X1C, 0X36, 0X63, 0X00, "$"
-	LETTER_Y     				DB 0X33, 0X33, 0X33, 0X1E, 0X0C, 0X0C, 0X1E, 0X00, "$"
-	LETTER_Z     				DB 0XFE, 0XC6, 0X8C, 0X18, 0X32, 0X66, 0XFE, 0X00, "$"
-
-	STR_COLON    				DB 0X00, 0X30, 0X30, 0X00, 0X00, 0X30, 0X30, 0X00, "$"
-	EXCLAMATION_MARK  				DB 0X18, 0X3C, 0X3C, 0X18, 0X18, 0X00, 0X18, 0X00, "$"
-
-	SPACE_LINE      			DB 0X00, 0X00, 0X00, 0X00, 0X00, 0X00, 0X00, 0X00, "$"
-
-	STR_LINE       				DB 11111111B
-	STR_EMPTY       			DB 00000000B
-
-	STR_WORD         			DB "HELLO WORLD$"
-	SIZE_NONE         			DB 0
-	SIZE_NONE_MINOR   			DB 0
-	MISTAKES           			DB 0
-	STR_GUESS   				DB 26  DUP("$")
-	SUCCESS_GUESS_COUNTER   	DB 0
-	ALPHABET_VALIDATION  		DB "ABCDEFGHIJKLMNOPQRSTUVWXYZ$"
-
-	MSG_GUESSED    				DW LETTER_G
-								DW LETTER_U
-								DW LETTER_E
-								DW LETTER_S
-								DW LETTER_S
-								DW LETTER_E
-								DW LETTER_D
-								DW STR_COLON
-								DW	"$"
-
-	MSG_RESTART 				DW LETTER_P
-								DW LETTER_R
-								DW LETTER_E
-								DW LETTER_S
-								DW LETTER_S
-								DW SPACE_LINE
-								DW LETTER_A
-								DW LETTER_N
-								DW LETTER_Y
-								DW SPACE_LINE
-								DW LETTER_K
-								DW LETTER_E
-								DW LETTER_Y
-								DW	"$"
-
-	MSG_WON  					DW LETTER_Y
-								DW LETTER_O
-								DW LETTER_U
-								DW SPACE_LINE
-								DW LETTER_W
-								DW LETTER_O
-								DW LETTER_N
-								DW EXCLAMATION_MARK
-								DW	"$"
-
-	MSG_LOST  					DW LETTER_Y
-								DW LETTER_O
-								DW LETTER_U
-								DW SPACE_LINE
-								DW LETTER_L
-								DW LETTER_O
-								DW LETTER_S
-								DW LETTER_E
-								DW EXCLAMATION_MARK
-								DW	"$"
-
-	TEXT_ONE    				DW LETTER_I
-								DW LETTER_N
-								DW LETTER_S
-								DW LETTER_E
-								DW LETTER_R
-								DW LETTER_T
-								DW SPACE_LINE
-								DW LETTER_Y
-								DW LETTER_O
-								DW LETTER_U
-								DW LETTER_R
-								DW SPACE_LINE
-								DW LETTER_G
-								DW LETTER_U
-								DW LETTER_E
-								DW LETTER_S
-								DW LETTER_S
-								DW STR_COLON
-								DW "$"
-
-	TEXT_TWO  					DW LETTER_A
-								DW LETTER_L
-								DW LETTER_R
-								DW LETTER_E
-								DW LETTER_A
-								DW LETTER_D
-								DW LETTER_Y
-								DW SPACE_LINE
-								DW LETTER_G
-								DW LETTER_U
-								DW LETTER_E
-								DW LETTER_S
-								DW LETTER_S
-								DW LETTER_E
-								DW LETTER_D
-								DW "$"
-
-	TEXT_THREE  				DW LETTER_I
-								DW LETTER_N
-								DW LETTER_V
-								DW LETTER_A
-								DW LETTER_L
-								DW LETTER_I
-								DW LETTER_D
-								DW SPACE_LINE
-								DW LETTER_C
-								DW LETTER_H
-								DW LETTER_A
-								DW LETTER_R
-								DW LETTER_A
-								DW LETTER_C
-								DW LETTER_T
-								DW LETTER_E
-								DW LETTER_R
-								DW "$"
-
-	MSG_TOP    					DW LETTER_T
-								DW LETTER_H
-								DW LETTER_E
-								DW SPACE_LINE
-								DW LETTER_H
-								DW LETTER_A
-								DW LETTER_N
-								DW LETTER_G
-								DW LETTER_M
-								DW LETTER_A
-								DW LETTER_N
-								DW SPACE_LINE
-								DW LETTER_G
-								DW LETTER_A
-								DW LETTER_M
-								DW LETTER_E
-								DW "$"
-
-	ALPHABET    				DW LETTER_A
-								DW LETTER_B
-								DW LETTER_C
-								DW LETTER_D
-								DW LETTER_E
-								DW LETTER_F
-								DW LETTER_G
-								DW LETTER_H
-								DW LETTER_I
-								DW LETTER_J
-								DW LETTER_K
-								DW LETTER_L
-								DW LETTER_M
-								DW LETTER_N
-								DW LETTER_O
-								DW LETTER_P
-								DW LETTER_Q
-								DW LETTER_R
-								DW LETTER_S
-								DW LETTER_T
-								DW LETTER_U
-								DW LETTER_V
-								DW LETTER_W
-								DW LETTER_X
-								DW LETTER_Y
-								DW LETTER_Z
-								DW "$"
-
-	ALPLHABET_INDEX      		DW 0
-	INDEX_STR_WORD        		DW 0
-
-	STR_LINES      				DB ?
-
-ENDS
-
-STACK SEGMENT
-    DW   128  DUP(0)
-ENDS
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; START ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-CODE SEGMENT
-START:
-
-    MOV AX, DATA
-    MOV DS, AX
-    MOV ES, AX
-
-    MOV AH, 0
-    MOV AL, 0DH
-    INT 10H
-
-    MOV SI, 0A000H
-    MOV ES, SI
-
-THE_BEGINNING:
-
-    XOR BX, BX
-    XOR AX, AX
-    XOR CX, CX
-    XOR DX, DX
-    XOR SI, SI
-    XOR DI, DI
-
-    MOV MISTAKES, 0
-    MOV SUCCESS_GUESS_COUNTER, 0
-
-    MOV COLUMN_A, 2
-    MOV LINE, 9
-
-SHOWS_HANG_VERTICAL:
-		LEA SI, HANG_VE
-
-		CMP BL, 8
-		JE SHOWS_HANG_HORIZONTAL
-
-		CALL SHOWS_LETTER
-
-		INC BL
-		INC LINE
-		JMP SHOWS_HANG_VERTICAL
-
-SHOWS_HANG_HORIZONTAL:
-
-		MOV BX, 0
-		MOV COLUMN_A, 2
-		MOV LINE, 9
-REPEAT_HANG_HORIZONTAL:
-
-		LEA SI, HANG_HO
-
-		CMP BL, 4
-		JE SHOWS_ROPE
-
-		CALL SHOWS_LETTER
-
-		INC BL
-		INC COLUMN_A
-		JMP REPEAT_HANG_HORIZONTAL
-
-SHOWS_ROPE:
-		MOV COLUMN_A, 5
-		MOV LINE, 10
-		LEA SI, ROPE
-		CALL SHOWS_LETTER
-
-BEGIN:
-		MOV BX, 0
-
-FILLS_STR_LINES:
-		CMP STR_WORD[BX],"$"
-		JE  CONTINUES
-
-		CMP STR_WORD[BX]," "
-		JE  STR_SPACELINE
-
-		MOV AL,STR_LINE
-		MOV STR_LINES[BX], AL
-
-		INC BX
-
-		JMP FILLS_STR_LINES
-
-STR_SPACELINE:
-		MOV AL,STR_EMPTY
-		MOV STR_LINES[BX], AL
-		INC BX
-		JMP FILLS_STR_LINES
-
-CONTINUES:
-		MOV BX,OFFSET SIZE_NONE
-		SUB BX,OFFSET STR_WORD
-		SUB BX, 1
-		MOV SIZE_NONE,BL
-
-		MOV BX, 0
-		MOV DL, SIZE_NONE
-		MOV SIZE_NONE_MINOR, DL
-
-COUNTS_SPACE_LINES:
-        CMP STR_WORD[BX], 32
-        JE DISCARD_SPACE_LINES
-        CMP STR_WORD[BX], "$"
-        JE CONTINUES_TWO
-
-        INC BX
-        JMP COUNTS_SPACE_LINES
-
-DISCARD_SPACE_LINES:
-        INC BX
-        SUB SIZE_NONE_MINOR, 1
-        JMP COUNTS_SPACE_LINES
-
-CONTINUES_TWO:
-		MOV LINE,14
-		MOV COLUMN_A,16
-		MOV BX,0
-		MOV CL,0
-		JMP SHOWS_STR_LINES
-
-SHOWS_STR_LINES:
-		LEA SI,STR_LINES[BX]
-
-		CMP CL,SIZE_NONE
-		JE  NEXT
-
-		CMP COLUMN_A, 38
-		JE  NEW_LINE
-
-		CALL CALCULATE_LINE_AND_COLUMN
-
-		MOV AL,[SI]
-		MOV ES:[DI], AL
-
-		INC BX
-		INC CL
-		ADD COLUMN_A,2
-
-		JMP SHOWS_STR_LINES
-
-NEW_LINE:
-		MOV COLUMN_A,16
-		ADD LINE, 2
-		JMP SHOWS_STR_LINES
-
-NEXT:
-		MOV LINE, 1
-		MOV COLUMN_A, 13
-
-		MOV BX, 0
-
-SHOWS_STR_WORD:
-		MOV SI, MSG_TOP[BX]
-
-		CMP SI, "$"
-		JE GUESS
-
-		CALL SHOWS_LETTER
-
-		ADD BX, 2
-		ADD COLUMN_A, 1
-
-		JMP SHOWS_STR_WORD
-
-    GUESS:
-        MOV  AH,08
-        INT  21h
-
-        CALL NOBREAK
-        CALL LIMPA_LINE
-        PUSH DI
-
-        CMP  AL,96
-        JA   UPPERCASE
-
-        JMP  GUESS_VALIDATION
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; THE END ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-UPPERCASE:
-    SUB  AL,20h
-    JMP  GUESS_VALIDATION
-
-NOBREAK:
-    POP  BX
-    PUSH BX
-    MOV  BX,0
-    RET
-
-LIST_ALPHABET_VALIDATION:
-    MOV STR_GUESS[DI],AL
-    MOV STR_GUESS[DI+1],"$"
-    RET
-
-VALIDATED:
-    CALL NOBREAK
-    JMP  ASCII
-
-GUESS_VALIDATION:
-    MOV  DI,BX
-    CMP  STR_GUESS[BX],AL
-    JE SHOWS_TEXT_TWO
-    CMP  STR_GUESS[BX],"$"
-    JE   VALIDATED
-
-    INC  BX
-    JMP  GUESS_VALIDATION
-
-SHOWS_TEXT_TWO:
-
-    MOV LINE, 5
-	MOV COLUMN_A, 10
-
-	PUSH BX
-
-	MOV BX, 0
-
-REPEAT_TEXT_TWO:
-	MOV SI, TEXT_TWO[BX]
-
-	CMP SI, "$"
-	JE GUESS
-
-	CALL SHOWS_LETTER
-
-	ADD BX, 2
-	ADD COLUMN_A, 1
-
-	JMP REPEAT_TEXT_TWO
-
-ASCII:
-    CMP  ALPHABET_VALIDATION[BX],AL
-    JE   EASCII
-    CMP  ALPHABET_VALIDATION[BX],"$"
-    JE SHOWS_TEXT_THREE
-
-    INC  BX
-    JMP  ASCII
-
-SHOWS_TEXT_THREE:
-    MOV LINE, 5
-	MOV COLUMN_A, 10
-	PUSH BX
-	MOV BX, 0
-
-	REPEAT_TEXT_THREE:
-	MOV SI, TEXT_THREE[BX]
-
-	CMP SI, "$"
-	JE GUESS
-
-	CALL SHOWS_LETTER
-
-	ADD BX, 2
-	ADD COLUMN_A, 1
-
-	JMP REPEAT_TEXT_THREE
-
-EASCII:
-    MOV  ALPLHABET_INDEX,BX
-    CALL NOBREAK
-    JMP  COMPARING
-
-COMPARING:
-    CMP  STR_WORD[BX], AL
-    JE   GOT_IT
-    CMP  STR_WORD[BX], "$"
-    JE   U_WRONG
-
-    INC  BX
-    JMP  COMPARING
-    MOV  INDEX_STR_WORD, BX
-
-GOT_IT:
-    CALL LIST_ALPHABET_VALIDATION
-    MOV  INDEX_STR_WORD, BX
-    POP  DI
-    POP  BX
-
-    CALL LETTER_BITMAP
-
-    CALL NOBREAK
-
-    MOV  BL, SIZE_NONE_MINOR
-    CMP  SUCCESS_GUESS_COUNTER, BL
-    JE GAMEOVER
-
-    JMP  GUESS
-
-U_WRONG:
-    CALL LIST_ALPHABET_VALIDATION
-
-    POP  BX
-    POP  DI
-
-    INC  MISTAKES
-    CALL VERIFY_MISTAKES
-    CMP  MISTAKES,6
-    JE GAMEOVER
-
-    JMP  GUESS
-
-LIMPA_LINE:
-    MOV LINE, 5
-	MOV COLUMN_A, 8
-	REPEAT_LIMPA_LINE:
-
-	LEA SI, SPACE_LINE
-
-	CMP COLUMN_A, 35
-	JE RETURNS
-
-	CALL SHOWS_LETTER
-	ADD COLUMN_A, 1
-
-	JMP REPEAT_LIMPA_LINE
-
-LETTER_BITMAP:
-    INC SUCCESS_GUESS_COUNTER
-
-    MOV CX, AX
-
-    MOV  DX, 2
-    MOV  AX, ALPLHABET_INDEX
-    MUL  DX
-    MOV  DI, AX
-
-    MOV  SI, ALPHABET[DI]
-    MOV  LINE, 13
-    MOV COLUMN_A,16
-
-    MOV  DX, INDEX_STR_WORD
-    ADD  COLUMN_A, DX
-    ADD  COLUMN_A, DX
-
-    CMP DX, 54
-    JG  LINE_SIX
-    CMP DX, 43
-    JG  LINE_FIVE
-    CMP DX, 32
-    JG  LINE_FOUR
-    CMP DX, 21
-    JG  LINE_THREE
-    CMP DX, 10
-    JG  LINE_TWO
-
-A:
-    CALL SHOWS_LETTER
-
-    MOV AX, CX
-
-    MOV BX, INDEX_STR_WORD
-    ADD BX, 1
-    ADD INDEX_STR_WORD, 1
-
-REPEAT_LETTER:
-    CMP STR_WORD[BX], AL
-    JE  LETTER_BITMAP
-    CMP STR_WORD[BX], "$"
-    JE RETURNS
-    INC BX
-    ADD INDEX_STR_WORD, 1
-    JMP REPEAT_LETTER
-
-LINE_TWO:
-    ADD LINE, 2
-    MOV COLUMN_A, 16
-    ADD COLUMN_A, DX
-    ADD COLUMN_A, DX
-    SUB COLUMN_A, 22
-    JMP A
-
-LINE_THREE:
-    ADD LINE, 4
-    MOV COLUMN_A, 16
-    ADD COLUMN_A, DX
-    ADD COLUMN_A, DX
-    SUB COLUMN_A, 44
-    JMP A
-
-LINE_FOUR:
-    ADD LINE, 6
-    MOV COLUMN_A, 16
-    ADD COLUMN_A, DX
-    ADD COLUMN_A, DX
-    SUB COLUMN_A, 66
-    JMP A
-
-LINE_FIVE:
-    ADD LINE, 8
-    MOV COLUMN_A, 16
-    ADD COLUMN_A, DX
-    ADD COLUMN_A, DX
-    SUB COLUMN_A, 88
-    JMP A
-
-LINE_SIX:
-    ADD LINE, 10
-    MOV COLUMN_A, 16
-    ADD COLUMN_A, DX
-    ADD COLUMN_A, DX
-    SUB COLUMN_A, 110
-    JMP A
-
-GAMEOVER:
-
-    CMP MISTAKES,6
-    JE  SHOWS_MSG_FAILURE
-
-    JMP SHOWS_MSG_SUCCESS
-
-THE_END:
-    MOV AX, 4C00H
-    INT 21H
-
-SHOWS_MSG_SUCCESS:
-    CALL CLEAN_SCREEN
-    MOV LINE, 10
-    MOV COLUMN_A, 14
-    MOV BX, 0
-
-    REPEAT_SUCCESS:
-    MOV SI, MSG_WON[BX]
-
-    CMP SI, "$"
-    JE SHOWS_MSG_RESTART
-
-    CALL SHOWS_LETTER
-
-    ADD  BX, 2
-    ADD  COLUMN_A, 1
-
-    JMP  REPEAT_SUCCESS
-
-SHOWS_MSG_FAILURE:
-    CALL CLEAN_SCREEN
-    MOV LINE, 10
-	MOV COLUMN_A, 14
-	MOV BX, 0
-
-	REPEAT_FAILURE:
-    MOV SI, MSG_LOST[BX]
-
-    CMP SI, "$"
-    JE SHOWS_MSG_RESTART
-
-    CALL SHOWS_LETTER
-
-    ADD  BX, 2
-    ADD  COLUMN_A, 1
-    JMP REPEAT_FAILURE
-
-SHOWS_MSG_RESTART:
-    MOV LINE, 12
-	MOV COLUMN_A, 5
-	MOV BX, 0
-
-	REPEAT_RESTART:
-    MOV SI, MSG_RESTART[BX]
-
-    CMP SI, "$"
-    JE RESTART
-
-    CALL SHOWS_LETTER
-
-    ADD  BX, 2
-    ADD  COLUMN_A, 1
-    JMP REPEAT_RESTART
-
-CLEAN_SCREEN:
-	MOV AX,0A000H
-    MOV ES,AX
-    XOR DI,DI
-    XOR AX,AX
-    MOV CX,32000D
-    CLD
-    REP STOSW
-    RET
-
-VERIFY_MISTAKES:
-    CMP MISTAKES, 1
-    JE SHOWS_HEAD
-
-    CMP MISTAKES, 2
-    JE SHOWS_BODY
-
-    CMP MISTAKES, 3
-    JE SHOWS_ARM
-
-    CMP MISTAKES, 4
-    JE SHOWS_BODY_COMPLETE
-
-    CMP MISTAKES, 5
-    JE SHOWS_LEG
-
-    CMP MISTAKES, 6
-    JE SHOWS_GUY_COMPLETE
-
-SHOWS_HEAD:
-	MOV COLUMN_A, 5
-	MOV LINE, 11
-	LEA SI, HEAD
-	CALL SHOWS_LETTER
-	RET
-
-SHOWS_BODY:
-    MOV COLUMN_A, 5
-	MOV LINE, 11
-	LEA SI, HEAD
-	CALL SHOWS_LETTER
-
-	MOV LINE, 12
-	LEA SI, BODY_1
-	CALL SHOWS_LETTER
-	RET
-
-SHOWS_ARM:
-    MOV COLUMN_A, 5
-	MOV LINE, 11
-	LEA SI, HEAD
-	CALL SHOWS_LETTER
-
-	MOV LINE, 12
-	LEA SI, BODY_2
-	CALL SHOWS_LETTER
-	RET
-
-SHOWS_BODY_COMPLETE:
-	MOV COLUMN_A, 5
-	MOV LINE, 11
-	LEA SI, HEAD
-	CALL SHOWS_LETTER
-
-	MOV LINE, 12
-	LEA SI, BODY_3
-	CALL SHOWS_LETTER
-	RET
-
-SHOWS_LEG:
-	MOV COLUMN_A, 5
-	MOV LINE, 11
-	LEA SI, HEAD
-	CALL SHOWS_LETTER
-
-	MOV LINE, 12
-	LEA SI, BODY_3
-	CALL SHOWS_LETTER
-
-	MOV LINE, 13
-	LEA SI, LEG_1
-	CALL SHOWS_LETTER
-	RET
-
-SHOWS_GUY_COMPLETE:
-	MOV COLUMN_A, 5
-	MOV LINE, 11
-	LEA SI, HEAD
-	CALL SHOWS_LETTER
-
-	MOV LINE, 12
-	LEA SI, BODY_3
-	CALL SHOWS_LETTER
-
-	MOV LINE, 13
-	LEA SI, LEG_2
-	CALL SHOWS_LETTER
-	RET
-
-CALCULATE_LINE_AND_COLUMN:
-	PUSH LINE
-	PUSH COLUMN_A
-	PUSH AX
-	PUSH BX
-
-	MOV DI, 0
-
-	MOV AX, LINE
-	MOV BX, 40
-	MUL BX
-
-	MOV BX, 08
-	MUL BX
-
-	MOV LINE, AX
-
-	ADD DI, COLUMN_A
-	ADD DI, LINE
-
-	POP BX
-	POP AX
-	POP COLUMN_A
-	POP LINE
-
-	RET
-
-SHOWS_LETTER:
-	CALL CALCULATE_LINE_AND_COLUMN
-WRITES:
-	MOV DL, [SI]
-	CMP DL, "$"
-	JE RETURNS
-
-	MOV ES:[DI], DL
-
-	ADD DI, 40
-	INC SI
-	JMP WRITES
-
-RETURNS:
-	RET
-
-SHOWS_STR_LINE:
-
-	CALL CALCULATE_LINE_AND_COLUMN
-
-	MOV AL, [SI]
-	MOV ES:[DI], AL
-
-	RET
-
-CLEAN_GUESS:
-    MOV DI, 0
-
-REPEAT_LMP_PALP:
-    MOV STR_GUESS[DI], "$"
-
-    CMP DI, 25
-    JE CLEAN_DONE
-
-    INC DI
-
-    JMP REPEAT_LMP_PALP
-
-RESTART:
-    MOV AH, 08
-    INT 21H
-
-    PUSH AX
-    CALL CLEAN_SCREEN
-    POP AX
-
-    PUSH DI
-    CALL CLEAN_GUESS
-
-CLEAN_DONE:
-    POP DI
-    JMP THE_END
-
-
-;-----NOT WORKING YET-----;                 
-ASCII_TO_BITMAP: 
-    PUSH AX
-    PUSH BX
-    PUSH DX 
-    PUSH DI 
-    
-    REPEAT_ASCII_TO_BITMAP:
-    MOV AH, 0                         
-    MOV AL, [SI]
-    SUB AL, 65
-    MOV DL, 2
-    MUL DL	 
-                     
-    CMP [SI], "$"
-	JE WORD_FINISHED  
-	CMP [SI], " "
-	JE EMPTY_SPACE
- 
-    MOV DI, AX   
-    
-    PUSH SI                          
-	
-	MOV SI, ALPHABET[DI] 
-	CALL SHOWS_LETTER 
-	
-	POP SI              
-	              
-EMPTY_SPACE:	  
-	INC COLUMN_A  
-	INC SI
-	
-	JMP REPEAT_ASCII_TO_BITMAP	
-	
-WORD_FINISHED:
-    POP AX
-    POP BX
-    POP DX
-    POP DI
-    RET
-                                        
-ENDS
-END START
+data segment
+
+	hang_ve    		db  11110000b
+								db  11110000b
+								db  11110000b
+								db  11110000b
+								db  11110000b
+								db  11110000b
+								db  11110000b
+								db  11110000b
+								db  "$"
+
+	hang_ho    		db  00000000b
+								db  00000000b
+								db  00000000b
+								db  00000000b
+								db  11111111b
+								db  11111111b
+								db  11111111b
+								db  11111111b
+								db  "$"
+
+	rope      		db  00011000b
+								db  00011000b
+								db  00011000b
+								db  00011000b
+								db  00011000b
+								db  00011000b
+								db  00011000b
+								db  00011000b
+								db	"$"
+
+	head      		db	00011000b
+								db	00111100b
+								db	01000010b
+								db	10100101b
+								db	10000001b
+								db	01000010b
+								db	00111100b
+								db	00011000b
+								db	"$"
+
+	body_1     		db 	00111100b
+								db	00111100b
+								db	00111100b
+								db	00111100b
+								db	00111100b
+								db	00111100b
+								db	00111100b
+								db	00111100b
+								db	"$"
+
+	body_2     		db 	00111100b
+								db	11111100b
+								db	10111100b
+								db	10111100b
+								db	10111100b
+								db	10111100b
+								db	10111100b
+								db	00111100b
+								db	"$"
+
+	body_3     		db 	00111100b
+								db	11111111b
+								db	10111101b
+								db	10111101b
+								db	10111101b
+								db	10111101b
+								db	10111101b
+								db	00111100b
+								db	"$"
+
+	leg_1     		db 	01100000b
+								db	01100000b
+								db	01100000b
+								db	01100000b
+								db	01100000b
+								db	01100000b
+								db	01100000b
+								db	11100000b
+								db	"$"
+
+	leg_2   			db 	01100110b
+								db	01100110b
+								db	01100110b
+								db	01100110b
+								db	01100110b
+								db	01100110b
+								db	01100110b
+								db	11100111b
+								db	"$"
+
+
+	line   						  dw 00
+	column_a  					dw 00
+
+	letter_a     				db 0x0c, 0x1e, 0x33, 0x33, 0x3f, 0x33, 0x33, 0x00, "$"
+	letter_b     				db 0xfc, 0x66, 0x66, 0x7c, 0x66, 0x66, 0xfc, 0x00, "$"
+	letter_c     				db 0x3c, 0x66, 0xc0, 0xc0, 0xc0, 0x66, 0x3c, 0x00, "$"
+	letter_d     				db 0xf8, 0x6c, 0x66, 0x66, 0x66, 0x6c, 0xf8, 0x00, "$"
+	letter_e     				db 0xfe, 0x62, 0x68, 0x78, 0x68, 0x62, 0xfe, 0x00, "$"
+	letter_f     				db 0xfe, 0x62, 0x68, 0x78, 0x68, 0x60, 0xf0, 0x00, "$"
+	letter_g     				db 0x3c, 0x66, 0xc0, 0xc0, 0xce, 0x66, 0x3e, 0x00, "$"
+	letter_h     				db 0x33, 0x33, 0x33, 0x3f, 0x33, 0x33, 0x33, 0x00, "$"
+	letter_i     				db 0x3c, 0x18, 0x18, 0x18, 0x18, 0x18, 0x3c, 0x00, "$"
+	letter_j     				db 0x1e, 0x0c, 0x0c, 0x0c, 0xcc, 0xcc, 0x78, 0x00, "$"
+	letter_k     				db 0xe6, 0x66, 0x6c, 0x78, 0x6c, 0x66, 0xe6, 0x00, "$"
+	letter_l     				db 0xf0, 0x60, 0x60, 0x60, 0x62, 0x66, 0xfe, 0x00, "$"
+	letter_m     				db 0x63, 0x77, 0x7f, 0x7f, 0x6b, 0x63, 0x63, 0x00, "$"
+	letter_n     				db 0xc6, 0xe6, 0xf6, 0xde, 0xce, 0xc6, 0xc6, 0x00, "$"
+	letter_o     				db 0x1c, 0x36, 0x63, 0x63, 0x63, 0x36, 0x1c, 0x00, "$"
+	letter_p     				db 0xfc, 0x66, 0x66, 0x7c, 0x60, 0x60, 0xf0, 0x00, "$"
+	letter_q     				db 0x78, 0xcc, 0xcc, 0xcc, 0xdc, 0x78, 0x1c, 0x00, "$"
+	letter_r     				db 0xfc, 0x66, 0x66, 0x7c, 0x6c, 0x66, 0xe6, 0x00, "$"
+	letter_s     				db 0x78, 0xcc, 0xe0, 0x70, 0x1c, 0xcc, 0x78, 0x00, "$"
+	letter_t     				db 0x3f, 0x2d, 0x0c, 0x0c, 0x0c, 0x0c, 0x1e, 0x00, "$"
+	letter_u     				db 0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x3f, 0x00, "$"
+	letter_v     				db 0x33, 0x33, 0x33, 0x33, 0x33, 0x1e, 0x0c, 0x00, "$"
+	letter_w     				db 0x63, 0x63, 0x63, 0x6b, 0x7f, 0x77, 0x63, 0x00, "$"
+	letter_x     				db 0x63, 0x63, 0x36, 0x1c, 0x1c, 0x36, 0x63, 0x00, "$"
+	letter_y     				db 0x33, 0x33, 0x33, 0x1e, 0x0c, 0x0c, 0x1e, 0x00, "$"
+	letter_z     				db 0xfe, 0xc6, 0x8c, 0x18, 0x32, 0x66, 0xfe, 0x00, "$"
+
+	str_colon    				db 0x00, 0x30, 0x30, 0x00, 0x00, 0x30, 0x30, 0x00, "$"
+	exclamation_mark  				db 0x18, 0x3c, 0x3c, 0x18, 0x18, 0x00, 0x18, 0x00, "$"
+
+	space_line      			db 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, "$"
+
+	str_line       				db 11111111b
+	str_empty       			db 00000000b
+
+	str_word         			db "HELLO WORLD$"
+	size_none         			db 0
+	size_none_minor   			db 0
+	mistakes           			db 0
+	str_guess   				db 26  dup("$")
+	success_guess_counter   	db 0
+	alphabet_validation  		db "ABCDEFGHIJKLMNOPQRSTUVWXYZ$"
+
+	msg_guessed    				dw letter_g
+								dw letter_u
+								dw letter_e
+								dw letter_s
+								dw letter_s
+								dw letter_e
+								dw letter_d
+								dw str_colon
+								dw	"$"
+
+	msg_restart 				dw letter_p
+								dw letter_r
+								dw letter_e
+								dw letter_s
+								dw letter_s
+								dw space_line
+								dw letter_a
+								dw letter_n
+								dw letter_y
+								dw space_line
+								dw letter_k
+								dw letter_e
+								dw letter_y
+								dw	"$"
+
+	msg_won  					dw letter_y
+								dw letter_o
+								dw letter_u
+								dw space_line
+								dw letter_w
+								dw letter_o
+								dw letter_n
+								dw exclamation_mark
+								dw	"$"
+
+	msg_lost  					dw letter_y
+								dw letter_o
+								dw letter_u
+								dw space_line
+								dw letter_l
+								dw letter_o
+								dw letter_s
+								dw letter_e
+								dw exclamation_mark
+								dw	"$"
+
+	text_one    				dw letter_i
+								dw letter_n
+								dw letter_s
+								dw letter_e
+								dw letter_r
+								dw letter_t
+								dw space_line
+								dw letter_y
+								dw letter_o
+								dw letter_u
+								dw letter_r
+								dw space_line
+								dw letter_g
+								dw letter_u
+								dw letter_e
+								dw letter_s
+								dw letter_s
+								dw str_colon
+								dw "$"
+
+	text_two  					dw letter_a
+								dw letter_l
+								dw letter_r
+								dw letter_e
+								dw letter_a
+								dw letter_d
+								dw letter_y
+								dw space_line
+								dw letter_g
+								dw letter_u
+								dw letter_e
+								dw letter_s
+								dw letter_s
+								dw letter_e
+								dw letter_d
+								dw "$"
+
+	text_three  				dw letter_i
+								dw letter_n
+								dw letter_v
+								dw letter_a
+								dw letter_l
+								dw letter_i
+								dw letter_d
+								dw space_line
+								dw letter_c
+								dw letter_h
+								dw letter_a
+								dw letter_r
+								dw letter_a
+								dw letter_c
+								dw letter_t
+								dw letter_e
+								dw letter_r
+								dw "$"
+
+	msg_top    					dw letter_t
+								dw letter_h
+								dw letter_e
+								dw space_line
+								dw letter_h
+								dw letter_a
+								dw letter_n
+								dw letter_g
+								dw letter_m
+								dw letter_a
+								dw letter_n
+								dw space_line
+								dw letter_g
+								dw letter_a
+								dw letter_m
+								dw letter_e
+								dw "$"
+
+	alphabet    				dw letter_a
+								dw letter_b
+								dw letter_c
+								dw letter_d
+								dw letter_e
+								dw letter_f
+								dw letter_g
+								dw letter_h
+								dw letter_i
+								dw letter_j
+								dw letter_k
+								dw letter_l
+								dw letter_m
+								dw letter_n
+								dw letter_o
+								dw letter_p
+								dw letter_q
+								dw letter_r
+								dw letter_s
+								dw letter_t
+								dw letter_u
+								dw letter_v
+								dw letter_w
+								dw letter_x
+								dw letter_y
+								dw letter_z
+								dw "$"
+
+	alplhabet_index      		dw 0
+	index_str_word        		dw 0
+
+	str_lines      				db ?
+
+ends
+
+stack segment
+    dw   128  dup(0)
+ends
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; start ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+code segment
+start:
+
+    mov ax, data
+    mov ds, ax
+    mov es, ax
+
+    mov ah, 0
+    mov al, 0dh
+    int 10h
+
+    mov si, 0a000h
+    mov es, si
+
+the_beginning:
+
+    xor bx, bx
+    xor ax, ax
+    xor cx, cx
+    xor dx, dx
+    xor si, si
+    xor di, di
+
+    mov mistakes, 0
+    mov success_guess_counter, 0
+
+    mov column_a, 2
+    mov line, 9
+
+shows_hang_vertical:
+		lea si, hang_ve
+
+		cmp bl, 8
+		je shows_hang_horizontal
+
+		call shows_letter
+
+		inc bl
+		inc line
+		jmp shows_hang_vertical
+
+shows_hang_horizontal:
+
+		mov bx, 0
+		mov column_a, 2
+		mov line, 9
+repeat_hang_horizontal:
+
+		lea si, hang_ho
+
+		cmp bl, 4
+		je shows_rope
+
+		call shows_letter
+
+		inc bl
+		inc column_a
+		jmp repeat_hang_horizontal
+
+shows_rope:
+		mov column_a, 5
+		mov line, 10
+		lea si, rope
+		call shows_letter
+
+begin:
+		mov bx, 0
+
+fills_str_lines:
+		cmp str_word[bx],"$"
+		je  continues
+
+		cmp str_word[bx]," "
+		je  str_spaceline
+
+		mov al,str_line
+		mov str_lines[bx], al
+
+		inc bx
+
+		jmp fills_str_lines
+
+str_spaceline:
+		mov al,str_empty
+		mov str_lines[bx], al
+		inc bx
+		jmp fills_str_lines
+
+continues:
+		mov bx,offset size_none
+		sub bx,offset str_word
+		sub bx, 1
+		mov size_none,bl
+
+		mov bx, 0
+		mov dl, size_none
+		mov size_none_minor, dl
+
+counts_space_lines:
+        cmp str_word[bx], 32
+        je discard_space_lines
+        cmp str_word[bx], "$"
+        je continues_two
+
+        inc bx
+        jmp counts_space_lines
+
+discard_space_lines:
+        inc bx
+        sub size_none_minor, 1
+        jmp counts_space_lines
+
+continues_two:
+		mov line,14
+		mov column_a,16
+		mov bx,0
+		mov cl,0
+		jmp shows_str_lines
+
+shows_str_lines:
+		lea si,str_lines[bx]
+
+		cmp cl,size_none
+		je  next
+
+		cmp column_a, 38
+		je  new_line
+
+		call calculate_line_and_column
+
+		mov al,[si]
+		mov es:[di], al
+
+		inc bx
+		inc cl
+		add column_a,2
+
+		jmp shows_str_lines
+
+new_line:
+		mov column_a,16
+		add line, 2
+		jmp shows_str_lines
+
+next:
+		mov line, 1
+		mov column_a, 13
+
+		mov bx, 0
+
+shows_str_word:
+		mov si, msg_top[bx]
+
+		cmp si, "$"
+		je guess
+
+		call shows_letter
+
+		add bx, 2
+		add column_a, 1
+
+		jmp shows_str_word
+
+    guess:
+        mov  ah,08
+        int  21h
+
+        call nobreak
+        call limpa_line
+        push di
+
+        cmp  al,96
+        ja   uppercase
+
+        jmp  guess_validation
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; the end ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+uppercase:
+    sub  al,20h
+    jmp  guess_validation
+
+nobreak:
+    pop  bx
+    push bx
+    mov  bx,0
+    ret
+
+list_alphabet_validation:
+    mov str_guess[di],al
+    mov str_guess[di+1],"$"
+    ret
+
+validated:
+    call nobreak
+    jmp  ascii
+
+guess_validation:
+    mov  di,bx
+    cmp  str_guess[bx],al
+    je shows_text_two
+    cmp  str_guess[bx],"$"
+    je   validated
+
+    inc  bx
+    jmp  guess_validation
+
+shows_text_two:
+
+    mov line, 5
+	mov column_a, 10
+
+	push bx
+
+	mov bx, 0
+
+repeat_text_two:
+	mov si, text_two[bx]
+
+	cmp si, "$"
+	je guess
+
+	call shows_letter
+
+	add bx, 2
+	add column_a, 1
+
+	jmp repeat_text_two
+
+ascii:
+    cmp  alphabet_validation[bx],al
+    je   eascii
+    cmp  alphabet_validation[bx],"$"
+    je shows_text_three
+
+    inc  bx
+    jmp  ascii
+
+shows_text_three:
+    mov line, 5
+	mov column_a, 10
+	push bx
+	mov bx, 0
+
+	repeat_text_three:
+	mov si, text_three[bx]
+
+	cmp si, "$"
+	je guess
+
+	call shows_letter
+
+	add bx, 2
+	add column_a, 1
+
+	jmp repeat_text_three
+
+eascii:
+    mov  alplhabet_index,bx
+    call nobreak
+    jmp  comparing
+
+comparing:
+    cmp  str_word[bx], al
+    je   got_it
+    cmp  str_word[bx], "$"
+    je   u_wrong
+
+    inc  bx
+    jmp  comparing
+    mov  index_str_word, bx
+
+got_it:
+    call list_alphabet_validation
+    mov  index_str_word, bx
+    pop  di
+    pop  bx
+
+    call letter_bitmap
+
+    call nobreak
+
+    mov  bl, size_none_minor
+    cmp  success_guess_counter, bl
+    je gameover
+
+    jmp  guess
+
+u_wrong:
+    call list_alphabet_validation
+
+    pop  bx
+    pop  di
+
+    inc  mistakes
+    call verify_mistakes
+    cmp  mistakes,6
+    je gameover
+
+    jmp  guess
+
+limpa_line:
+    mov line, 5
+	mov column_a, 8
+	repeat_limpa_line:
+
+	lea si, space_line
+
+	cmp column_a, 35
+	je returns
+
+	call shows_letter
+	add column_a, 1
+
+	jmp repeat_limpa_line
+
+letter_bitmap:
+    inc success_guess_counter
+
+    mov cx, ax
+
+    mov  dx, 2
+    mov  ax, alplhabet_index
+    mul  dx
+    mov  di, ax
+
+    mov  si, alphabet[di]
+    mov  line, 13
+    mov column_a,16
+
+    mov  dx, index_str_word
+    add  column_a, dx
+    add  column_a, dx
+
+    cmp dx, 54
+    jg  line_six
+    cmp dx, 43
+    jg  line_five
+    cmp dx, 32
+    jg  line_four
+    cmp dx, 21
+    jg  line_three
+    cmp dx, 10
+    jg  line_two
+
+a:
+    call shows_letter
+
+    mov ax, cx
+
+    mov bx, index_str_word
+    add bx, 1
+    add index_str_word, 1
+
+repeat_letter:
+    cmp str_word[bx], al
+    je  letter_bitmap
+    cmp str_word[bx], "$"
+    je returns
+    inc bx
+    add index_str_word, 1
+    jmp repeat_letter
+
+line_two:
+    add line, 2
+    mov column_a, 16
+    add column_a, dx
+    add column_a, dx
+    sub column_a, 22
+    jmp a
+
+line_three:
+    add line, 4
+    mov column_a, 16
+    add column_a, dx
+    add column_a, dx
+    sub column_a, 44
+    jmp a
+
+line_four:
+    add line, 6
+    mov column_a, 16
+    add column_a, dx
+    add column_a, dx
+    sub column_a, 66
+    jmp a
+
+line_five:
+    add line, 8
+    mov column_a, 16
+    add column_a, dx
+    add column_a, dx
+    sub column_a, 88
+    jmp a
+
+line_six:
+    add line, 10
+    mov column_a, 16
+    add column_a, dx
+    add column_a, dx
+    sub column_a, 110
+    jmp a
+
+gameover:
+
+    cmp mistakes,6
+    je  shows_msg_failure
+
+    jmp shows_msg_success
+
+the_end:
+    mov ax, 4c00h
+    int 21h
+
+shows_msg_success:
+    call clean_screen
+    mov line, 10
+    mov column_a, 14
+    mov bx, 0
+
+    repeat_success:
+    mov si, msg_won[bx]
+
+    cmp si, "$"
+    je shows_msg_restart
+
+    call shows_letter
+
+    add  bx, 2
+    add  column_a, 1
+
+    jmp  repeat_success
+
+shows_msg_failure:
+    call clean_screen
+    mov line, 10
+	mov column_a, 14
+	mov bx, 0
+
+	repeat_failure:
+    mov si, msg_lost[bx]
+
+    cmp si, "$"
+    je shows_msg_restart
+
+    call shows_letter
+
+    add  bx, 2
+    add  column_a, 1
+    jmp repeat_failure
+
+shows_msg_restart:
+    mov line, 12
+	mov column_a, 5
+	mov bx, 0
+
+	repeat_restart:
+    mov si, msg_restart[bx]
+
+    cmp si, "$"
+    je restart
+
+    call shows_letter
+
+    add  bx, 2
+    add  column_a, 1
+    jmp repeat_restart
+
+clean_screen:
+	mov ax,0a000h
+    mov es,ax
+    xor di,di
+    xor ax,ax
+    mov cx,32000d
+    cld
+    rep stosw
+    ret
+
+verify_mistakes:
+    cmp mistakes, 1
+    je shows_head
+
+    cmp mistakes, 2
+    je shows_body
+
+    cmp mistakes, 3
+    je shows_arm
+
+    cmp mistakes, 4
+    je shows_body_complete
+
+    cmp mistakes, 5
+    je shows_leg
+
+    cmp mistakes, 6
+    je shows_guy_complete
+
+shows_head:
+	mov column_a, 5
+	mov line, 11
+	lea si, head
+	call shows_letter
+	ret
+
+shows_body:
+    mov column_a, 5
+	mov line, 11
+	lea si, head
+	call shows_letter
+
+	mov line, 12
+	lea si, body_1
+	call shows_letter
+	ret
+
+shows_arm:
+    mov column_a, 5
+	mov line, 11
+	lea si, head
+	call shows_letter
+
+	mov line, 12
+	lea si, body_2
+	call shows_letter
+	ret
+
+shows_body_complete:
+	mov column_a, 5
+	mov line, 11
+	lea si, head
+	call shows_letter
+
+	mov line, 12
+	lea si, body_3
+	call shows_letter
+	ret
+
+shows_leg:
+	mov column_a, 5
+	mov line, 11
+	lea si, head
+	call shows_letter
+
+	mov line, 12
+	lea si, body_3
+	call shows_letter
+
+	mov line, 13
+	lea si, leg_1
+	call shows_letter
+	ret
+
+shows_guy_complete:
+	mov column_a, 5
+	mov line, 11
+	lea si, head
+	call shows_letter
+
+	mov line, 12
+	lea si, body_3
+	call shows_letter
+
+	mov line, 13
+	lea si, leg_2
+	call shows_letter
+	ret
+
+calculate_line_and_column:
+	push line
+	push column_a
+	push ax
+	push bx
+
+	mov di, 0
+
+	mov ax, line
+	mov bx, 40
+	mul bx
+
+	mov bx, 08
+	mul bx
+
+	mov line, ax
+
+	add di, column_a
+	add di, line
+
+	pop bx
+	pop ax
+	pop column_a
+	pop line
+
+	ret
+
+shows_letter:
+	call calculate_line_and_column
+writes:
+	mov dl, [si]
+	cmp dl, "$"
+	je returns
+
+	mov es:[di], dl
+
+	add di, 40
+	inc si
+	jmp writes
+
+returns:
+	ret
+
+shows_str_line:
+
+	call calculate_line_and_column
+
+	mov al, [si]
+	mov es:[di], al
+
+	ret
+
+clean_guess:
+    mov di, 0
+
+repeat_lmp_palp:
+    mov str_guess[di], "$"
+
+    cmp di, 25
+    je clean_done
+
+    inc di
+
+    jmp repeat_lmp_palp
+
+restart:
+    mov ah, 08
+    int 21h
+
+    push ax
+    call clean_screen
+    pop ax
+
+    push di
+    call clean_guess
+
+clean_done:
+    pop di
+    jmp the_end
+
+
+;-----not working yet-----;
+ascii_to_bitmap:
+    push ax
+    push bx
+    push dx
+    push di
+
+    repeat_ascii_to_bitmap:
+    mov ah, 0
+    mov al, [si]
+    sub al, 65
+    mov dl, 2
+    mul dl
+
+    cmp [si], "$"
+	je word_finished
+	cmp [si], " "
+	je empty_space
+
+    mov di, ax
+
+    push si
+
+	mov si, alphabet[di]
+	call shows_letter
+
+	pop si
+
+empty_space:
+	inc column_a
+	inc si
+
+	jmp repeat_ascii_to_bitmap
+
+word_finished:
+    pop ax
+    pop bx
+    pop dx
+    pop di
+    ret
+
+ends
+end start
