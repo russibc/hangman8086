@@ -37,7 +37,6 @@
 ;;                                                                                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
 data segment
 
 	hang_ve    		db  11110000b
@@ -177,127 +176,14 @@ data segment
 	success_guess_counter   	db 0
 	alphabet_validation  		db "ABCDEFGHIJKLMNOPQRSTUVWXYZ$"
 
-	msg_guessed    				dw letter_g
-								dw letter_u
-								dw letter_e
-								dw letter_s
-								dw letter_s
-								dw letter_e
-								dw letter_d
-								dw str_colon
-								dw	"$"
+	msg_restart			dw "PRESS ANY KEY$"
+	msg_won					dw "YOU WON$"
+	msg_lost				dw "YOU LOSE$"
+	already_guessed	dw "ALREADY GUESSED$"
+	invalid_char		dw "INVALID CHARACTER$"
+	msg_top					dw "THE HANGMAN GAME$"
 
-	msg_restart 				dw letter_p
-								dw letter_r
-								dw letter_e
-								dw letter_s
-								dw letter_s
-								dw space_line
-								dw letter_a
-								dw letter_n
-								dw letter_y
-								dw space_line
-								dw letter_k
-								dw letter_e
-								dw letter_y
-								dw	"$"
-
-	msg_won  					dw letter_y
-								dw letter_o
-								dw letter_u
-								dw space_line
-								dw letter_w
-								dw letter_o
-								dw letter_n
-								dw exclamation_mark
-								dw	"$"
-
-	msg_lost  					dw letter_y
-								dw letter_o
-								dw letter_u
-								dw space_line
-								dw letter_l
-								dw letter_o
-								dw letter_s
-								dw letter_e
-								dw exclamation_mark
-								dw	"$"
-
-	text_one    				dw letter_i
-								dw letter_n
-								dw letter_s
-								dw letter_e
-								dw letter_r
-								dw letter_t
-								dw space_line
-								dw letter_y
-								dw letter_o
-								dw letter_u
-								dw letter_r
-								dw space_line
-								dw letter_g
-								dw letter_u
-								dw letter_e
-								dw letter_s
-								dw letter_s
-								dw str_colon
-								dw "$"
-
-	text_two  					dw letter_a
-								dw letter_l
-								dw letter_r
-								dw letter_e
-								dw letter_a
-								dw letter_d
-								dw letter_y
-								dw space_line
-								dw letter_g
-								dw letter_u
-								dw letter_e
-								dw letter_s
-								dw letter_s
-								dw letter_e
-								dw letter_d
-								dw "$"
-
-	text_three  				dw letter_i
-								dw letter_n
-								dw letter_v
-								dw letter_a
-								dw letter_l
-								dw letter_i
-								dw letter_d
-								dw space_line
-								dw letter_c
-								dw letter_h
-								dw letter_a
-								dw letter_r
-								dw letter_a
-								dw letter_c
-								dw letter_t
-								dw letter_e
-								dw letter_r
-								dw "$"
-
-	msg_top    					dw letter_t
-								dw letter_h
-								dw letter_e
-								dw space_line
-								dw letter_h
-								dw letter_a
-								dw letter_n
-								dw letter_g
-								dw letter_m
-								dw letter_a
-								dw letter_n
-								dw space_line
-								dw letter_g
-								dw letter_a
-								dw letter_m
-								dw letter_e
-								dw "$"
-
-	alphabet    				dw letter_a
+	alphabet    	dw letter_a
 								dw letter_b
 								dw letter_c
 								dw letter_d
@@ -461,7 +347,7 @@ shows_str_lines:
 		lea si,str_lines[bx]
 
 		cmp cl,size_none
-		je  next
+		je  show_msg_top
 
 		cmp column_a, 38
 		je  new_line
@@ -482,43 +368,31 @@ new_line:
 		add line, 2
 		jmp shows_str_lines
 
-next:
-		mov line, 1
-		mov column_a, 13
+show_msg_top:
+	mov line, 1
+	mov column_a, 13
+	lea si, msg_top
+	call ascii_to_bitmap
+	jmp guess
 
-		mov bx, 0
+guess:
+	mov ah, 08
+	int 21h
 
-shows_str_word:
-		mov si, msg_top[bx]
+  call nobreak
+  call limpa_line
+  push di
 
-		cmp si, "$"
-		je guess
+  cmp al,96
+  ja uppercase
 
-		call shows_letter
-
-		add bx, 2
-		add column_a, 1
-
-		jmp shows_str_word
-
-    guess:
-        mov  ah,08
-        int  21h
-
-        call nobreak
-        call limpa_line
-        push di
-
-        cmp  al,96
-        ja   uppercase
-
-        jmp  guess_validation
+  jmp guess_validation
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; the end ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 uppercase:
-    sub  al,20h
-    jmp  guess_validation
+    sub al,20h
+    jmp guess_validation
 
 nobreak:
     pop  bx
@@ -546,26 +420,11 @@ guess_validation:
     jmp  guess_validation
 
 shows_text_two:
-
-    mov line, 5
-	mov column_a, 10
-
-	push bx
-
-	mov bx, 0
-
-repeat_text_two:
-	mov si, text_two[bx]
-
-	cmp si, "$"
-	je guess
-
-	call shows_letter
-
-	add bx, 2
-	add column_a, 1
-
-	jmp repeat_text_two
+  mov line, 5
+	mov column_a, 13
+	lea si, already_guessed
+	call ascii_to_bitmap
+	jmp guess
 
 ascii:
     cmp  alphabet_validation[bx],al
@@ -577,23 +436,11 @@ ascii:
     jmp  ascii
 
 shows_text_three:
-    mov line, 5
-	mov column_a, 10
-	push bx
-	mov bx, 0
-
-	repeat_text_three:
-	mov si, text_three[bx]
-
-	cmp si, "$"
-	je guess
-
-	call shows_letter
-
-	add bx, 2
-	add column_a, 1
-
-	jmp repeat_text_three
+  mov line, 5
+	mov column_a, 12
+	lea si, invalid_char
+	call ascii_to_bitmap
+	jmp guess
 
 eascii:
     mov  alplhabet_index,bx
@@ -742,7 +589,6 @@ line_six:
     jmp a
 
 gameover:
-
     cmp mistakes,6
     je  shows_msg_failure
 
@@ -753,68 +599,37 @@ the_end:
     int 21h
 
 shows_msg_success:
-    call clean_screen
-    mov line, 10
-    mov column_a, 14
-    mov bx, 0
-
-    repeat_success:
-    mov si, msg_won[bx]
-
-    cmp si, "$"
-    je shows_msg_restart
-
-    call shows_letter
-
-    add  bx, 2
-    add  column_a, 1
-
-    jmp  repeat_success
+  call clean_screen
+  mov line, 10
+  mov column_a, 17
+	lea si, msg_won
+	call ascii_to_bitmap
+	jmp shows_msg_restart
 
 shows_msg_failure:
-    call clean_screen
-    mov line, 10
-	mov column_a, 14
-	mov bx, 0
-
-	repeat_failure:
-    mov si, msg_lost[bx]
-
-    cmp si, "$"
-    je shows_msg_restart
-
-    call shows_letter
-
-    add  bx, 2
-    add  column_a, 1
-    jmp repeat_failure
+  call clean_screen
+  mov line, 10
+	mov column_a, 16
+	lea si, msg_lost
+	call ascii_to_bitmap
+	jmp shows_msg_restart
 
 shows_msg_restart:
-    mov line, 12
-	mov column_a, 5
-	mov bx, 0
-
-	repeat_restart:
-    mov si, msg_restart[bx]
-
-    cmp si, "$"
-    je restart
-
-    call shows_letter
-
-    add  bx, 2
-    add  column_a, 1
-    jmp repeat_restart
+  mov line, 12
+	mov column_a, 14
+	lea si, msg_restart
+	call ascii_to_bitmap
+	jmp restart
 
 clean_screen:
 	mov ax,0a000h
-    mov es,ax
-    xor di,di
-    xor ax,ax
-    mov cx,32000d
-    cld
-    rep stosw
-    ret
+  mov es,ax
+  xor di,di
+  xor ax,ax
+  mov cx,32000d
+  cld
+  rep stosw
+  ret
 
 verify_mistakes:
     cmp mistakes, 1
@@ -985,33 +800,29 @@ clean_done:
     pop di
     jmp the_end
 
-
-;-----not working yet-----;
 ascii_to_bitmap:
-    push ax
-    push bx
-    push dx
-    push di
+  push ax
+  push bx
+  push dx
+  push di
 
-    repeat_ascii_to_bitmap:
-    mov ah, 0
-    mov al, [si]
-    sub al, 65
-    mov dl, 2
-    mul dl
+repeat_ascii_to_bitmap:
+  mov ah, 0
+  mov al, [si]
+  sub al, 65
+  mov dl, 2
+  mul dl
 
-    cmp [si], "$"
+  cmp [si], "$"
 	je word_finished
 	cmp [si], " "
 	je empty_space
 
-    mov di, ax
+  mov di, ax
 
-    push si
-
+  push si
 	mov si, alphabet[di]
 	call shows_letter
-
 	pop si
 
 empty_space:
@@ -1021,11 +832,11 @@ empty_space:
 	jmp repeat_ascii_to_bitmap
 
 word_finished:
-    pop ax
-    pop bx
-    pop dx
-    pop di
-    ret
+  pop ax
+  pop bx
+  pop dx
+  pop di
+	ret
 
 ends
 end start
